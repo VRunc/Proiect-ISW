@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paint</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="CSS4.css">
+  
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="logo">Paint<span>Studio</span></div>
+    <div class="subtitle">Canvas Drawing App</div>
+  </div>
+</header>
+
+<div class="studio">
+
+  <!-- TOOLBAR ROW 1: Colors + Tools -->
+  <div class="toolbar">
+    <span class="toolbar-label">Culori</span>
+    <div id="colors">
+      <button id="black"  onclick="changeColor('#1a1a2e')" title="Negru"></button>
+      <button id="white"  onclick="changeColor('#f0f0f5')" title="Alb"></button>
+      <button id="red"    onclick="changeColor('#ff4757')" title="Roșu"></button>
+      <button id="pink"   onclick="changeColor('#ff6b9d')" title="Roz"></button>
+      <button id="orange" onclick="changeColor('#ff9f43')" title="Portocaliu"></button>
+      <button id="yellow" onclick="changeColor('#ffd93d')" title="Galben"></button>
+      <button id="green"  onclick="changeColor('#2ed573')" title="Verde"></button>
+      <button id="teal"   onclick="changeColor('#1e90ff')" title="Cyan"></button>
+      <button id="blue"   onclick="changeColor('#5352ed')" title="Albastru"></button>
+      <button id="purple" onclick="changeColor('#a55eea')" title="Violet"></button>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="tools">
+      <button class="tool-btn active" id="pencilBtn" onclick="setTool('pencil')" title="Creion">✏️</button>
+      <button class="tool-btn" id="eraserBtn" onclick="setTool('eraser')" title="Radieră">🩹</button>
+    </div>
+  </div>
+
+  <!-- TOOLBAR ROW 2: Size + Actions -->
+  <div class="toolbar">
+    <span class="toolbar-label">Grosime</span>
+    <div class="size-control">
+      <input type="range" class="size-slider" id="sizeSlider" min="1" max="40" value="5" oninput="changeSize(this.value)">
+      <div class="size-preview">
+        <div class="size-dot" id="sizeDot" style="width:5px;height:5px;"></div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <button class="action-btn save" onclick="saveCanvas()">💾 Salvează</button>
+    <button class="action-btn danger" onclick="clearCanvas()">🗑 Șterge tot</button>
+  </div>
+
+  <!-- CANVAS -->
+  <div class="canvas-wrapper">
+    <canvas id="canvas" width="700" height="440"></canvas>
+  </div>
+
+  <!-- STATUS -->
+  <div class="status-bar">
+    <span class="status-text" id="statusText">Gata de desenat</span>
+    <div class="color-indicator">
+      <div class="color-swatch-current" id="currentSwatch" style="background:#1a1a2e;"></div>
+      <span id="currentColorLabel">#1a1a2e</span>
+    </div>
+  </div>
+
+</div>
+
+<script src="JS.js"></script>
+</body>
+</html>
