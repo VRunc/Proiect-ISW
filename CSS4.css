@@ -1,24 +1,30 @@
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 :root {
-  --bg: #0f0f13;
-  --panel: #1a1a22;
-  --panel2: #22222e;
-  --border: #2e2e3e;
-  --accent: #ff6b6b;
-  --text: #e8e8f0;
-  --text-dim: #6b6b8a;
+  --bg: #0f0f13;          /* Fundalul paginii */
+  --panel: #1a1a22;       /* Fundalul panourilor principale */
+  --panel2: #22222e;      /* Fundalul elementelor secundare */
+  --border: #2e2e3e;      /* Culoarea marginilor (borders) */
+  --accent: #ff6b6b;      /* Culoarea de accent (butoane active etc.) */
+  --text: #e8e8f0;        /* Culoarea textului principal */
+  --text-dim: #6b6b8a;    /* Culoarea textului estompat (secundar) */
 }
 
 body {
   background: var(--bg);
   color: var(--text);
   font-family: 'Syne', sans-serif;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  height: 100vh;          /* Ocupă exact înălțimea vizibilă a ecranului */
+  width: 100vw;           /* Ocupă exact lățimea vizibilă a ecranului */
+  overflow: hidden;       /* Previne barele de defilare (scrollbars) globale */
+  display: flex;          /* Folosește modelul Flexbox pentru aspect */
+  flex-direction: column; /* Așază elementele pe verticală (coloană) */
   padding: 16px;
 }
 
@@ -27,13 +33,27 @@ header {
   align-items: center;
   gap: 12px;
   margin-bottom: 12px;
-  flex-shrink: 0;
+  flex-shrink: 0;         /* Previne micșorarea antetului dacă spațiul este limitat */
 }
 
-.logo { font-size: 24px; font-weight: 800; letter-spacing: -1px; }
-.logo span { color: var(--accent); }
-.subtitle { font-size: 11px; color: var(--text-dim); font-family: 'Space Mono', monospace; text-transform: uppercase; }
+.logo {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
 
+.logo span {
+  color: var(--accent);
+}
+
+.subtitle {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'Space Mono', monospace;
+  text-transform: uppercase;
+}
+
+/*Container Principal*/
 .studio {
   background: var(--panel);
   border: 1px solid var(--border);
@@ -42,28 +62,54 @@ header {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  flex: 1;
-  min-height: 0;
+  flex: 1;                /* Ocupă tot spațiul vertical rămas disponibil */
+  min-height: 0;          /* Permite interiorului să facă overflow curat */
 }
 
 .toolbar {
   display: flex;
   align-items: center;
   gap: 12px;
-  flex-wrap: wrap;
+  flex-wrap: wrap;        /* Permite elementelor să treacă pe rândul următor pe ecrane mici */
   flex-shrink: 0;
 }
 
-.toolbar-label { font-size: 10px; color: var(--text-dim); font-family: 'Space Mono', monospace; text-transform: uppercase; }
-
-#colors { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-#colors > button {
-  width: 30px; height: 30px; border-radius: 50%; border: 2px solid transparent; cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease; outline: none;
+.toolbar-label {
+  font-size: 10px;
+  color: var(--text-dim);
+  font-family: 'Space Mono', monospace;
+  text-transform: uppercase;
 }
-#colors > button:hover { transform: scale(1.2); }
-#colors > button.active { border-color: white; box-shadow: 0 0 0 3px rgba(255,255,255,0.25); transform: scale(1.15); }
 
+/* Meniul de culori predefinite */
+#colors {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+#colors > button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease; /* Animație lină la interacțiune */
+  outline: none;
+}
+
+#colors > button:hover {
+  transform: scale(1.2);
+}
+
+#colors > button.active {
+  border-color: white;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25); /* Creează un inel vizual extern */
+  transform: scale(1.15);
+}
+
+/* Definirea culorilor individuale */
 #black  { background: #1a1a2e; }
 #white  { background: #f0f0f5; }
 #red    { background: #ff4757; }
@@ -75,65 +121,272 @@ header {
 #blue   { background: #5352ed; }
 #purple { background: #a55eea; }
 
-/* CUSTOM PICKER */
-.custom-picker-wrapper { position: relative; display: flex; align-items: center; }
-#customColorBtn {
-  width: 30px; height: 30px; border-radius: 50%; border: 2px solid transparent; cursor: pointer;
-  background: conic-gradient(red, yellow, lime, aqua, blue, magenta, red);
-  outline: none; transition: transform 0.15s ease;
+.custom-picker-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
 }
-#customColorBtn:hover { transform: scale(1.2); }
-#customColorBtn.active { border-color: white; box-shadow: 0 0 0 3px rgba(255,255,255,0.25); transform: scale(1.15); }
+
+#customColorBtn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  background: conic-gradient(red, yellow, lime, aqua, blue, magenta, red); /* Spectru de culori */
+  outline: none;
+  transition: transform 0.15s ease;
+}
+
+#customColorBtn:hover {
+  transform: scale(1.2);
+}
+
+#customColorBtn.active {
+  border-color: white;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
+  transform: scale(1.15);
+}
 
 .custom-picker-panel {
-  display: none; position: absolute; top: 40px; left: 0; background: var(--panel2);
-  border: 1px solid var(--border); border-radius: 10px; padding: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.8); z-index: 100; width: 170px;
+  display: none;          /* Ascuns implicit */
+  position: absolute;
+  top: 40px;
+  left: 0;
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  z-index: 100;           /* Se asigură că panoul apare deasupra altor elemente */
+  width: 170px;
 }
-.custom-picker-panel.visible { display: block; }
 
-.picker-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 12px; }
-.grid-swatch {
-  width: 100%; aspect-ratio: 1; border-radius: 4px; border: 1px solid var(--border);
-  cursor: pointer; outline: none;
+.custom-picker-panel.visible {
+  display: block;         /* Clasa adăugată din JavaScript pentru a-l face vizibil */
 }
 
-.picker-hex { display: flex; align-items: center; gap: 4px; background: var(--panel); border: 1px solid var(--border); border-radius: 6px; padding: 4px; }
-.hex-symbol { color: var(--text-dim); font-family: 'Space Mono', monospace; font-size: 12px; padding-left: 4px; }
+/* Grila interioară a selectorului personalizat */
+.native-picker-wrapper {
+  width: 100%;
+  height: 60px;
+  margin-bottom: 12px;
+  position: relative;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+}
+
+.native-picker-hint {
+  position: absolute;
+  pointer-events: none; /* Esențial: Permite click-ului să treacă prin text direct pe input-ul invizibil de dedesubt */
+  font-size: 11px;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0px 1px 4px rgba(0,0,0,0.9); /* Umbră puternică pentru a fi vizibil pe orice culoare de fundal */
+  font-family: 'Space Mono', monospace;
+  text-transform: uppercase;
+}
+
+#nativeColorInput {
+  /* Supradimensionăm input-ul pentru a ascunde granițele implicite inestetice adăugate de Chrome/Firefox */
+  width: 150%;  
+  height: 150%;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  outline: none;
+}
+
+/* Container pentru introducerea codului Hexazecimal */
+.picker-hex {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 4px;
+}
+
+.hex-symbol {
+  color: var(--text-dim);
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  padding-left: 4px;
+}
+
 .picker-hex input {
-  background: transparent; border: none; color: var(--text); font-family: 'Space Mono', monospace;
-  font-size: 12px; width: 60px; outline: none;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  width: 60px;
+  outline: none;
 }
+
 .apply-btn {
-  background: var(--border); color: var(--text); border: none; padding: 4px 8px;
-  border-radius: 4px; font-size: 10px; cursor: pointer;
+  background: var(--border);
+  color: var(--text);
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  cursor: pointer;
 }
-.apply-btn:hover { background: var(--accent); }
 
-/* DIVIDER & TOOLS */
-.divider { width: 1px; height: 30px; background: var(--border); flex-shrink: 0; }
-.size-control { display: flex; align-items: center; gap: 10px; }
-.size-slider { -webkit-appearance: none; width: 100px; height: 4px; background: var(--border); border-radius: 99px; cursor: pointer; }
-.size-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; background: var(--accent); border-radius: 50%; }
-.size-preview { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; }
-.size-dot { background: white; border-radius: 50%; }
+.apply-btn:hover {
+  background: var(--accent);
+}
 
-.tools { display: flex; gap: 6px; }
-.tool-btn { background: var(--panel2); border: 1px solid var(--border); color: var(--text-dim); width: 36px; height: 36px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; }
-.tool-btn:hover { background: var(--border); color: var(--text); }
-.tool-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+.divider {
+  width: 1px;
+  height: 30px;
+  background: var(--border);
+  flex-shrink: 0;
+}
 
-.action-btn { background: var(--panel2); border: 1px solid var(--border); color: var(--text); padding: 8px 16px; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
-.action-btn:hover { background: var(--border); }
+/* Controlul pentru grosimea pensulei */
+.size-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-/* CANVAS WRAPPER - SCALING TARGET */
+/* Stilizarea glisorului (range input) */
+.size-slider {
+  -webkit-appearance: none;
+  width: 100px;
+  height: 4px;
+  background: var(--border);
+  border-radius: 99px;
+  cursor: pointer;
+}
+
+.size-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.size-preview {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Punctul care indică vizual grosimea pensulei */
+.size-dot {
+  background: white;
+  border-radius: 50%;
+}
+
+.tools {
+  display: flex;
+  gap: 6px;
+}
+
+/* Butoane pentru Creion/Radieră */
+.tool-btn {
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.tool-btn:hover {
+  background: var(--border);
+  color: var(--text);
+}
+
+.tool-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+/* Butoane de acțiune (Șterge / Salvează) */
+.action-btn {
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 8px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.action-btn:hover {
+  background: var(--border);
+}
+
+/* Zona de desen */
 .canvas-wrapper {
-  position: relative; border-radius: 12px; overflow: auto;
-  border: 1px solid var(--border); flex: 1; background: var(--panel2); touch-action: none;
+  position: relative;
+  border-radius: 12px;
+  overflow: auto;         /* Permite scroll-ul intern dacă canvas-ul primește zoom in */
+  border: 1px solid var(--border);
+  flex: 1;                /* Ocupă tot spațiul vizual disponibil rămas */
+  background: var(--panel2);
+  touch-action: none;     /* Oprește comportamentele tactile native ale browserului (ex: pull-to-refresh) în această zonă */
 }
 
-#canvas { display: block; cursor: crosshair; transform-origin: top left; }
+#canvas {
+  display: block;
+  cursor: crosshair;      /* Cursor sub formă de țintă pentru precizie la desen */
+  transform-origin: top left; /* Zoom-ul se face relativ la colțul din stânga sus */
+}
 
-.status-bar { display: flex; justify-content: space-between; align-items: center; padding-top: 4px; flex-shrink: 0; }
-.status-text, .color-indicator { font-size: 11px; color: var(--text-dim); font-family: 'Space Mono', monospace; display: flex; align-items: center; gap: 8px; }
-.color-swatch-current { width: 18px; height: 18px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.2); }
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 4px;
+  flex-shrink: 0;
+}
+
+.status-text,
+.color-indicator {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'Space Mono', monospace;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.color-swatch-current {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.size-value {
+  font-size: 12px;
+  color: var(--text);
+  font-family: 'Space Mono', monospace;
+  min-width: 36px;        /* Oferă o lățime fixă pentru a evita mișcarea elementelor când treci de la o cifră la două (ex: 5 -> 10) */
+  text-align: right;      /* Aliniază textul la dreapta pentru un aspect ordonat */
+}

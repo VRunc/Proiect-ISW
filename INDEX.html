@@ -35,16 +35,12 @@
       <div class="custom-picker-wrapper" id="customPickerWrapper">
         <button id="customColorBtn" onclick="toggleCustomPicker()" title="Culoare Personalizată"></button>
         <div class="custom-picker-panel" id="customPickerPanel">
-          <div class="picker-grid">
-             <button class="grid-swatch" style="background:#ff7f50" onclick="changeColor('#ff7f50')"></button>
-             <button class="grid-swatch" style="background:#ff1493" onclick="changeColor('#ff1493')"></button>
-             <button class="grid-swatch" style="background:#8a2be2" onclick="changeColor('#8a2be2')"></button>
-             <button class="grid-swatch" style="background:#00ced1" onclick="changeColor('#00ced1')"></button>
-             <button class="grid-swatch" style="background:#32cd32" onclick="changeColor('#32cd32')"></button>
-             <button class="grid-swatch" style="background:#cd853f" onclick="changeColor('#cd853f')"></button>
-             <button class="grid-swatch" style="background:#708090" onclick="changeColor('#708090')"></button>
-             <button class="grid-swatch" style="background:#000000" onclick="changeColor('#000000')"></button>
+          
+          <div class="native-picker-wrapper" title="Deschide spectrul de culori">
+            <input type="color" id="nativeColorInput" value="#1a1a2e" oninput="handleNativeColor(this.value)">
+            <span class="native-picker-hint">Apasă pentru spectru</span>
           </div>
+
           <div class="picker-hex">
              <span class="hex-symbol">#</span>
              <input type="text" id="hexInput" maxlength="6" placeholder="Hex Code">
@@ -69,12 +65,14 @@
       <div class="size-preview">
         <div class="size-dot" id="sizeDot" style="width:5px;height:5px;"></div>
       </div>
+      <span id="sizeValueDisplay" class="size-value">5px</span>
     </div>
 
     <div class="divider"></div>
     
-    <span class="toolbar-label">Zoom</span>
+    <span class="toolbar-label">Zoom & Undo</span>
     <div class="tools">
+      <button class="tool-btn" onclick="undoAction()" title="Anulează ultima acțiune">↩️</button>
       <button class="tool-btn" onclick="adjustZoom(-0.2)" title="Zoom Out">🔍-</button>
       <button class="tool-btn" onclick="resetZoom()" title="Reset Zoom">🔄</button>
       <button class="tool-btn" onclick="adjustZoom(0.2)" title="Zoom In">🔍+</button>
@@ -82,8 +80,11 @@
 
     <div class="divider"></div>
 
-    <button class="action-btn save" onclick="saveCanvas()">💾 Salvează</button>
-    <button class="action-btn danger" onclick="clearCanvas()">🗑 Șterge tot</button>
+    <span class="toolbar-label">Acțiuni</span>
+    <div class="tools">
+      <button class="action-btn save" onclick="saveCanvas()">Salvează</button>
+      <button class="action-btn danger" onclick="clearCanvas()">Șterge tot</button>
+    </div>
   </div>
 
   <div class="canvas-wrapper" id="canvasWrapper">
