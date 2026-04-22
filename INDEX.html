@@ -2,11 +2,10 @@
 <html lang="ro">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Paint</title>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="CSS4.css">
-  
 </head>
 <body>
 
@@ -19,7 +18,6 @@
 
 <div class="studio">
 
-  <!-- TOOLBAR ROW 1: Colors + Tools -->
   <div class="toolbar">
     <span class="toolbar-label">Culori</span>
     <div id="colors">
@@ -33,6 +31,27 @@
       <button id="teal"   onclick="changeColor('#1e90ff')" title="Cyan"></button>
       <button id="blue"   onclick="changeColor('#5352ed')" title="Albastru"></button>
       <button id="purple" onclick="changeColor('#a55eea')" title="Violet"></button>
+      
+      <div class="custom-picker-wrapper" id="customPickerWrapper">
+        <button id="customColorBtn" onclick="toggleCustomPicker()" title="Culoare Personalizată"></button>
+        <div class="custom-picker-panel" id="customPickerPanel">
+          <div class="picker-grid">
+             <button class="grid-swatch" style="background:#ff7f50" onclick="changeColor('#ff7f50')"></button>
+             <button class="grid-swatch" style="background:#ff1493" onclick="changeColor('#ff1493')"></button>
+             <button class="grid-swatch" style="background:#8a2be2" onclick="changeColor('#8a2be2')"></button>
+             <button class="grid-swatch" style="background:#00ced1" onclick="changeColor('#00ced1')"></button>
+             <button class="grid-swatch" style="background:#32cd32" onclick="changeColor('#32cd32')"></button>
+             <button class="grid-swatch" style="background:#cd853f" onclick="changeColor('#cd853f')"></button>
+             <button class="grid-swatch" style="background:#708090" onclick="changeColor('#708090')"></button>
+             <button class="grid-swatch" style="background:#000000" onclick="changeColor('#000000')"></button>
+          </div>
+          <div class="picker-hex">
+             <span class="hex-symbol">#</span>
+             <input type="text" id="hexInput" maxlength="6" placeholder="Hex Code">
+             <button class="apply-btn" onclick="applyHexInput()">OK</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="divider"></div>
@@ -43,7 +62,6 @@
     </div>
   </div>
 
-  <!-- TOOLBAR ROW 2: Size + Actions -->
   <div class="toolbar">
     <span class="toolbar-label">Grosime</span>
     <div class="size-control">
@@ -54,17 +72,24 @@
     </div>
 
     <div class="divider"></div>
+    
+    <span class="toolbar-label">Zoom</span>
+    <div class="tools">
+      <button class="tool-btn" onclick="adjustZoom(-0.2)" title="Zoom Out">🔍-</button>
+      <button class="tool-btn" onclick="resetZoom()" title="Reset Zoom">🔄</button>
+      <button class="tool-btn" onclick="adjustZoom(0.2)" title="Zoom In">🔍+</button>
+    </div>
+
+    <div class="divider"></div>
 
     <button class="action-btn save" onclick="saveCanvas()">💾 Salvează</button>
     <button class="action-btn danger" onclick="clearCanvas()">🗑 Șterge tot</button>
   </div>
 
-  <!-- CANVAS -->
-  <div class="canvas-wrapper">
-    <canvas id="canvas" width="700" height="440"></canvas>
+  <div class="canvas-wrapper" id="canvasWrapper">
+    <canvas id="canvas"></canvas>
   </div>
 
-  <!-- STATUS -->
   <div class="status-bar">
     <span class="status-text" id="statusText">Gata de desenat</span>
     <div class="color-indicator">
